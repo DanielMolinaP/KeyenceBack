@@ -29,7 +29,7 @@ server.use((req, res, next) => {
 // Configurar Multer para manejar los archivos Excel
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './uploads'); // Directorio donde se almacenarán los archivos subidos
+    cb(null, path.join(__dirname, './uploads')); // Directorio donde se almacenarán los archivos subidos
   },
   filename: function(req, file, cb) {
     const fileName = path.parse(file.originalname).name;
@@ -38,6 +38,7 @@ const storage = multer.diskStorage({
     cb(null, tableName + fileExtension);
   }
 });
+
 const upload = multer({ storage: storage });
 
 
